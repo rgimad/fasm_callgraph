@@ -12,16 +12,13 @@ if __name__ == "__main__":
     if not os.path.isfile(input_file):
         print(f"Error: file {input_file} not found")
         exit(-1)
-    with open(input_file, 'r', encoding='utf8') as f:
+    with open(input_file, 'r') as f:
         source_code = f.read()
-    # print(source_code[:150])
-    # print(re.search(r'^\w+:', source_code, re.MULTILINE))
-    source_code = re.sub(re.compile(";.*?\n" ), "", source_code) # remove all comments
-    # print(source_code[:1500])
+    source_code = re.sub(re.compile(";.*?\n" ), "\n", source_code) # remove all comments
+    print(source_code)
     labels = [{'name': x.group()[:-1], 'start': x.start(), 'end': x.end()} for x in re.finditer(r'^\w+:', source_code, re.MULTILINE)] + [{'start': len(source_code) - 1, 'end': len(source_code) - 1}]
     
     for i in range(len(labels) - 1):
-        # print(type(labels[i + 1]))
         labels[i]['code'] = source_code[labels[i]['end'] : labels[i + 1]['start']]
 
     g = graphviz.Digraph(filename = input_file + '_graph.dot', encoding='utf-8', graph_attr={'rankdir':'LR'})
