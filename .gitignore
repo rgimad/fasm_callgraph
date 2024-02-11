@@ -3,5 +3,4 @@ env/*
 *.pdf
 *.asm
 *.inc
-test123.py
 *.code-workspace

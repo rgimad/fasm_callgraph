@@ -15,7 +15,6 @@ if __name__ == "__main__":
     with open(input_file, 'r') as f:
         source_code = f.read()
     source_code = re.sub(re.compile(";.*?\n" ), "\n", source_code) # remove all comments
-    print(source_code)
     labels = [{'name': x.group()[:-1], 'start': x.start(), 'end': x.end()} for x in re.finditer(r'^\w+:', source_code, re.MULTILINE)] + [{'start': len(source_code) - 1, 'end': len(source_code) - 1}]
     
     for i in range(len(labels) - 1):
