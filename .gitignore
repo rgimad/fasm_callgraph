@@ -1,4 +1,6 @@
 env/*
 *.dot
 *.pdf
+*.asm
+*.inc
 *.code-workspace
